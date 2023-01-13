@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+class Node{
+    int data;
+    Node next,previous;
+    Node(int data){
+        this.data=data;
+    }
+}
+class LL{
+    Node head,tail;
+    int size=0;
+    void add(int val){
+        Node node=new Node(val);
+        if(head==null){
+            head=tail=node;
+        }
+        else{
+            tail.next=node;
+            node.previous=tail;
+            tail=node;
+        }
+    }
+    //delte the node form last
+    void deleteLast(){
+        if(size==1){
+            head=null;tail=null;
+        }
+        else if(size==0){
+            System.out.println("Con not possible");
+        }
+        else {
+            tail = tail.previous;
+            tail.next = null;
+        }
+    }
+    //delte the node from first
+    void deleteFirst(){
+        if(size==1){
+            head=null;tail=null;
+        }
+        else if(size==0){
+            System.out.println("Con not possible");
+        }
+        else {
+            head = head.next;
+            head.previous = null;
+        }
+    }
+    //delete the node from middle
+    void deleteMiddle(){
+        Node temp=tail;
+        int mid=size/2;
+        for(int i=size-1;i>mid;i--){
+            temp=temp.previous;
+        }
+        temp.previous.next=temp.next;
+        temp.next.previous=temp.previous;
+    }
+    //delete the node from index Number
+    void deleteIndex(int index){
+        if(index>size){
+            System.out.println("con't be possible becase index no is more than linkedList size");
+            System.out.println("index Size is :"+size+"  So index size should be less than ");
+            return;
+        }
+        int mid=size/2;
+        if(index>mid){
+            Node temp=tail;
+            for(int i=size-1;i>index;i--){
+                temp=temp.previous;
+            }
+            temp.previous.next=temp.next;
+            temp.next.previous=temp.previous;
+        }
+        else{
+            Node temp=head;
+            for(int i=0;i<index;i++){
+                temp=temp.next;
+            }
+            temp.previous.next=temp.next;
+            temp.next.previous=temp.previous;
+        }
+    }
+    void print(){
+        for(Node temp=head;temp!=null;temp=temp.next){
+            System.out.print(temp.data+" ");
+        }
+        System.out.println();
+    }
+}
+class DisplayLinkedList{
+    public static void main(String[] args) {
+        LL ll=new LL();
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            ll.add(sc.nextInt());
+            ll.size++;
+        }
+        ll.print();
+        int index=sc.nextInt();
+//        ll.deleteLast();    //delete from last
+//        ll.print();
+//        ll.deleteFirst();   //delete from the first
+//        ll.print();
+//        ll.deleteMiddle();    //delete from middle
+//        ll.print();
+        ll.deleteIndex(index);  //delete by index
+        ll.print();
+    }
+}
