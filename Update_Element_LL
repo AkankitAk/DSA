@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+class LL2{
+    Node head,tail;
+    int size=0;
+    void add(int value){
+        Node node=new Node(value);
+        if(head==null){
+            head=tail=node;
+            size++;
+        }
+        else{
+            tail.next=node;
+            tail=tail.next;
+            size++;
+        }
+    }
+    //Update the node from first
+    void udateAtFirst(int ele){
+        head.data=ele;
+    }
+    //update the node from last
+    void updateAtLast(int ele){
+        tail.data=ele;
+    }
+    //update the element from index number
+    void updateFromIndex(int ele,int index){
+        if(index>size) System.out.println("Index Out of range");
+        else {
+            Node temp = head;
+            for (int i = 0; i < index; i++) {
+                temp = temp.next;
+            }
+            temp.data=ele;
+        }
+    }
+    void print(){
+        for(Node temp=head; temp!=null;temp=temp.next){
+            System.out.print(temp.data+" ");
+        }
+        System.out.println();
+    }
+}
+public class UpdateElementValue {
+    public static void main(String[] args) {
+        LL2 ll=new LL2();
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            ll.add(sc.nextInt());
+        }
+        int ele=sc.nextInt();
+        int index=sc.nextInt();
+        ll.print();
+
+//        ll.udateAtFirst(ele);   // update element in the first
+//        ll.print();
+
+//        ll.updateAtLast(ele);   // update element in  the last
+//        ll.print();
+
+        ll.updateFromIndex(ele,index);
+        ll.print();
+    }
+}
