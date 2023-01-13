@@ -1,0 +1,110 @@
+                      AVG,MIN,MAX,REVERSE
+===============================================================
+
+import java.util.Scanner;
+
+class LL3{
+    Node head,tail;
+    int size=0;
+    void add(int value){
+        Node node=new Node(value);
+        if(head==null){
+            head=tail=node;
+        }
+        else{
+            tail.next=node;
+            tail=tail.next;
+        }
+    }
+    //Average of the linked list
+    void avg(){
+        Node temp=head;
+        int sum=0;
+        for(temp=head;temp!=null;temp=temp.next){
+            sum+=temp.data;
+        }
+        int avg=sum/size;
+        System.out.println("Average Value form the Linked List :"+avg);
+    }
+    // Minimum value from the linked List
+    void minValue(){
+        int min=Integer.MAX_VALUE;
+        for(Node temp=head;temp!=null;temp=temp.next){
+            if(temp.data<min) min=temp.data;
+        }
+        System.out.println("Minimum from the Linked List :"+min);
+    }
+    // Maximum value from the linked List
+    void maxValue(){
+        int max=Integer.MIN_VALUE;
+        for(Node temp=head;temp!=null;temp=temp.next){
+            if(temp.data>max) max=temp.data;
+        }
+        System.out.println("Minimum from the Linked List :"+max);
+    }
+    //Reverse Linked list By using Data Iterative
+    private Node getNodeAt(int index){
+        Node temp=head;
+        for(int i=0;i<index;i++){
+            temp=temp.next;
+        }
+        return temp;
+    }
+    void reverseDI(){
+        int left=0;
+        int right=size-1;
+        while(left<right){
+            Node leftNode=getNodeAt(left);
+            Node rightNode=getNodeAt(right);
+            int temp=leftNode.data;
+            leftNode.data=rightNode.data;
+            rightNode.data=temp;
+            left++;
+            right--;
+
+        }
+    }
+    // Reverse the node by using Pinter Iterative;
+    void reversePI(){
+        Node prev=null;
+        Node cur=head;
+        while(cur!=null){
+            Node curNodeNext=cur.next;
+
+            cur.next=prev;
+
+            prev=cur;
+            cur=curNodeNext;
+        }
+        //Swaping the node head and tails
+        Node temp=head;
+        head=tail;
+        tail=temp;
+    }
+    void print(){
+        for(Node temp=head;temp!=null;temp=temp.next){
+            System.out.print(temp.data+" ");
+        }
+        System.out.println();
+    }
+}
+public class AvgInLinkedList {
+    public static void main(String[] args) {
+        LL3 ll=new LL3();
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            ll.add(sc.nextInt());
+            ll.size++;
+        }
+        ll.print();
+        ll.avg();       //Average
+        ll.minValue();  //Minimum value
+        ll.maxValue();  //maximum value
+//        ll.reverseDI(); // reverse by Data Iterative
+//        ll.print();
+        ll.reversePI(); //reverse by Pinter Iterative
+        ll.print();
+
+    }
+}
