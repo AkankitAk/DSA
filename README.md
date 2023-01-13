@@ -1,0 +1,3 @@
+# DSA
+
+If Any File doesnot contain any Node class then you create First Node class.
