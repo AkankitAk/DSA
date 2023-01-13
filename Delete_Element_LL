@@ -1,0 +1,107 @@
+import java.util.Scanner;
+
+class LL1{
+    Node head,tail;
+    int size=0;
+    void add(int value){
+        int size=0;
+        Node node=new Node(value);
+        if(head==null){
+            head=tail=node;
+        }
+        else{
+            tail.next=node;
+            tail=tail.next;
+        }
+    }
+    //Delete Node from Last
+    void deleteFromLast(){
+        if(size==0) System.out.println("Not Possible to delte any node because their is no linked List ");
+        else if(size==1){
+            head=tail=null;
+            size--;
+        }
+        else{
+            Node temp=head;
+            for(int i=0;i<size-2;i++){
+                temp=temp.next;
+            }
+            tail=temp;
+            tail.next=null;
+            size--;
+        }
+    }
+
+    // Delete Node from First
+    void deleteFromFirst(){
+        if(size==0){
+            System.out.println("Not Possible to delte any node because their is no linked List ");
+        }
+        else if(size==1){
+            head=null;
+            tail=null;
+            size=0;
+        }
+        else {
+            head = head.next;
+            size--;
+        }
+    }
+    //Delete from Middle node
+    void deleteFromMiddle(){
+        int middle=size/2;
+        Node temp=head;
+        Node temp1=head.next;
+        for(int i=0;i<middle-1;i++){
+            temp=temp.next;
+            temp1=temp1.next;
+        }
+        temp.next=temp1.next;
+        size--;
+    }
+    //delete from idex number
+    void delteFromIndex(int index){
+        Node temp=head;
+        Node temp1=head.next;
+        for(int i=0;i<index-1;i++){
+            temp=temp.next;
+            temp1=temp1.next;
+        }
+        temp.next=temp1.next;
+        size--;
+    }
+    void print(){
+        for(Node temp=head;temp!=null;temp=temp.next) {
+            System.out.print(temp.data + " ");
+        }
+        System.out.println();
+    }
+}
+
+public class DeleteNodeElement {
+    public static void main(String[] args) {
+        LL1 ll=new LL1();
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int index=sc.nextInt();
+        for(int i=0;i<n;i++){
+            ll.add(sc.nextInt());
+            ll.size++;
+        }
+        ll.print();
+
+//        ll.deleteFromLast();  //delete from last node
+//        ll.print();
+
+//        ll.deleteFromFirst(); // delte from first node
+//        ll.print();
+
+//        ll.deleteFromMiddle();  // delete from Middle Node
+//        ll.print();
+
+        ll.delteFromIndex(index); // delete from index number
+        ll.print();
+
+        System.out.println(ll.size);
+    }
+}
