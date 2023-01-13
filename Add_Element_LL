@@ -1,0 +1,110 @@
+import java.util.Scanner;
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data=data;
+    }
+}
+class LL{
+    Node head,tail;
+    void add(int value){
+        Node node=new Node(value);
+        if(head==null){
+            head=tail=node;
+        }
+        else{
+            tail.next=node;
+            tail=tail.next;
+        }
+    }
+    // add element at last
+    void addLast(int ele){
+        Node node=new Node(ele);
+        node.next=null;
+        tail.next=node;
+        tail=node;
+    }
+    // add Element at First
+    void addFirst(int ele){
+        Node node=new Node(ele);
+        node.next=head;
+        head=node;
+    }
+    // add Elemnt by index
+    void addAtIndex(int index,int indexEle){
+        int count=0;
+        Node temp=head;
+        for(temp=head;temp!=null;temp=temp.next){
+            count++;
+        }
+        if(index > count || index < 0 ) System.out.println("Not Possible Because index is more than the LinkedList size");
+        else if(index==0) addFirst(indexEle);
+        else if(index==count) addLast(indexEle);
+        else{
+            Node node=new Node(indexEle);
+            temp=head;
+            count=0;
+            while(count<index-1){
+                temp=temp.next;
+                count++;
+            }
+            node.next=temp.next;
+            temp.next=node;
+        }
+
+    }
+    //add element At Middle
+    void addAtMiddle(int middleEle){
+        Node temp=head;
+        int count=0;
+        for(temp=head;temp!=null;temp=temp.next){
+            count++;
+        }
+        Node node=new Node(middleEle);
+        count=count/2;
+        int i=0;temp=head;
+        while(i<count-1){
+            temp=temp.next;
+            i++;
+        }
+        node.next=temp.next;
+        temp.next=node;
+    }
+    //print the Linked List
+    void print(){
+        for(Node temp=head;temp!=null;temp=temp.next){
+            System.out.print(temp.data+" ");
+        }
+        System.out.println();
+    }
+}
+public class DisplayLinkedList{
+    public static void main(String[] args) {
+        LL ll=new LL();
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            ll.add(sc.nextInt());   // Create a linked lisr
+        }
+        //int last_ele=sc.nextInt();
+        //int firat_ele=sc.nextInt();
+//        int index=sc.nextInt();
+//        int indexEle=sc.nextInt();
+        int middleEle=sc.nextInt();
+        ll.print();   // print a linked List
+
+        //ll.addLast(last_ele);    // add Element in last
+        //ll.print();
+
+        //ll.addFirst(firat_ele); //add Element in First
+        //ll.print();
+
+//        ll.addAtIndex(index,indexEle); // add Element By index
+//        ll.print();
+
+        ll.addAtMiddle(middleEle);
+        ll.print();
+
+    }
+}
